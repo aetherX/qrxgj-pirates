@@ -38,6 +38,12 @@ public class GameCanvas extends Canvas {
 	Random r;
 	EntityDisco disco;
 	
+	/**
+	 * Sets up the canvas.
+	 * 
+	 * @param w - Width of desired canvas
+	 * @param h - Height of desired canvas
+	 */
 	public GameCanvas(int w, int h) {
 	// set up the canvas and stuff
 		setPreferredSize(new Dimension(w, h));
@@ -50,6 +56,9 @@ public class GameCanvas extends Canvas {
 		init();
 	}
 	
+	/**
+	 * Initial method.
+	 */
 	private void init() {
 		r = new Random();
 		disco = new EntityDisco(100);
@@ -81,6 +90,11 @@ public class GameCanvas extends Canvas {
 		renderTh.start();
 	}
 	
+	/**
+	 * Applies the rendered image to this canvas with double buffer.
+	 * 
+	 * @param g - the specified Graphics context
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if(		bufferI == null 						|| // if the bufferI doesn't exist or is wrong
@@ -93,6 +107,11 @@ public class GameCanvas extends Canvas {
 		g.drawImage(bufferI, 0, 0, this); // finally, paint the image
 	}
 	
+	/**
+	 * Updates this canvas.
+	 * <p>
+	 * This method is called in response to a call to repaint. Updates this canvas by calling paint.
+	 */
 	@Override
 	public void update(Graphics g){
 	// THIS IS IMPORTANT!
@@ -102,6 +121,11 @@ public class GameCanvas extends Canvas {
 		paint(g);
 	}
 	
+	/**
+	 * Renders an image on this canvas.
+	 * 
+	 * @param g - the specified Graphics context
+	 */
 	private void render(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
