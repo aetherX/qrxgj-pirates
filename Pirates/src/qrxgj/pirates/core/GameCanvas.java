@@ -59,16 +59,13 @@ public class GameCanvas extends Canvas {
 		renderTh = new Thread(new Runnable() {
 			@Override
 			public void run(){
+				try{ Thread.sleep(50); } catch(Exception ex) { } // problem seemed to be: repainting too fast, need to let
+																 // running = true work or something? unsure.
 				while(running) {
 					repaint();
-					System.out.println("repainted"); // for some reason, if there is only repaint(); in the while
-													 // loop, it seems to refuse to loop more than once :(
-													 // if you could solve it that would be epicsauce.
 				}
 			}
 		});
-		
-		renderTh.start();
 		
 		computeTh = new Thread(new Runnable() {
 			@Override
@@ -81,6 +78,7 @@ public class GameCanvas extends Canvas {
 		});
 		
 		computeTh.start();
+		renderTh.start();
 	}
 	
 	@Override
