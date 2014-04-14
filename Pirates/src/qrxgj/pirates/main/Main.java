@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import qrxgj.pirates.core.GameCanvas;
 
 public class Main {
-	public static final int GWIDTH = 300;
-	public static final int GHEIGHT = 200;
+	public static final int GWIDTH = 500;
+	public static final int GHEIGHT = 300;
 	
 	public static void main(String[] args) {
 		JFrame window = new JFrame();

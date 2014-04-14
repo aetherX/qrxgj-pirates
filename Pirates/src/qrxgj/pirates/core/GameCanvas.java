@@ -2,6 +2,7 @@ package qrxgj.pirates.core;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -29,7 +30,6 @@ public class GameCanvas extends Canvas {
 	
 	private Graphics bufferG;
 	private BufferedImage bufferI;
-//	private BufferStrategy bufferS;
 	
 	//
 	//
@@ -40,7 +40,7 @@ public class GameCanvas extends Canvas {
 	
 	public GameCanvas(int w, int h) {
 	// set up the canvas and stuff
-		setSize(w, h);
+		setPreferredSize(new Dimension(w, h));
 		setVisible(true);
 		setBackground(Color.BLACK);
 		
@@ -52,7 +52,7 @@ public class GameCanvas extends Canvas {
 	
 	private void init() {
 		r = new Random();
-		disco = new EntityDisco(20, 20);
+		disco = new EntityDisco(20);
 		
 		running = true;
 		
@@ -61,7 +61,9 @@ public class GameCanvas extends Canvas {
 			public void run(){
 				while(running) {
 					repaint();
-					try{ Thread.sleep(1); } catch(Exception ex) { }
+					System.out.println("repainted"); // for some reason, if there is only repaint(); in the while
+													 // loop, it seems to refuse to loop more than once :(
+													 // if you could solve it that would be epicsauce.
 				}
 			}
 		});
@@ -81,25 +83,25 @@ public class GameCanvas extends Canvas {
 		computeTh.start();
 	}
 	
-	// IT STILL FLICKERS GAHHHHHHHHHHHHHHHHHHHHHHHHHHH
-	
 	@Override
 	public void paint(Graphics g) {
-		if(		bufferI == null 						||
+		if(		bufferI == null 						|| // if the bufferI doesn't exist or is wrong
 				bufferI.getHeight(this) != getHeight() 	||
 				bufferI.getWidth(this) != getWidth()) 	{
-			bufferI = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+			bufferI = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB); // create it
+			bufferG = bufferI.createGraphics(); // create bufferG, the corresponding bufferI graphics
 		}
-		bufferG = bufferI.createGraphics();
-		render(bufferG);
-		g.drawImage(bufferI, 0, 0, this);
-		
-//		createBufferStrategy(2);
-//		bufferS = getBufferStrategy();
-//		
-//		bufferG = bufferS.getDrawGraphics();
-//		render(bufferG);
-//		bufferS.show();
+		render(bufferG); // give the bufferG to render(g)
+		g.drawImage(bufferI, 0, 0, this); // finally, paint the image
+	}
+	
+	@Override
+	public void update(Graphics g){
+	// THIS IS IMPORTANT!
+	// update(g) is called upon repaint().
+	// if it is not overridden, it will first flush the screen, then paint everything.
+	// this creates flickering.
+		paint(g);
 	}
 	
 	private void render(Graphics g) {
