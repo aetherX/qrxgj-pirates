@@ -52,17 +52,16 @@ public class GameCanvas extends Canvas {
 	
 	private void init() {
 		r = new Random();
-		disco = new EntityDisco(20);
+		disco = new EntityDisco(100);
 		
 		running = true;
 		
 		renderTh = new Thread(new Runnable() {
 			@Override
 			public void run(){
-				try{ Thread.sleep(50); } catch(Exception ex) { } // problem seemed to be: repainting too fast, need to let
-																 // running = true work or something? unsure.
 				while(running) {
 					repaint();
+					System.out.print("");
 				}
 			}
 		});

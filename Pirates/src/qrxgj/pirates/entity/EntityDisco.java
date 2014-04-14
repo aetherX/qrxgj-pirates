@@ -18,13 +18,13 @@ public class EntityDisco extends Entity implements Renderable {
 	
 	@Override
 	public void renderTo(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(Color.CYAN);
 		g.fillOval(x - (sz / 2), 100 - (sz / 2), sz, sz);
 	}
 
 	@Override
 	public void compute() {
-		x += 3;
+		x += 10;
 		
 		if(x > 490){
 			x = 10;
