@@ -21,19 +21,19 @@ public class EntityDisco extends Entity implements Renderable {
 	public void renderTo(Graphics g) {
 		switch(pos) {
 		case 0:
-			g.setColor(Color.BLUE);
+			g.setColor(Color.RED);
 			g.fillOval(((Main.GWIDTH / 5) * 1) - (w / 2), (Main.GHEIGHT / 2) - (h / 2), w, h);
 			break;
 		case 1:
-			g.setColor(Color.RED);
+			g.setColor(Color.GREEN);
 			g.fillOval(((Main.GWIDTH / 5) * 2) - (w / 2), (Main.GHEIGHT / 2) - (h / 2), w, h);
 			break;
 		case 2:
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.BLUE);
 			g.fillOval(((Main.GWIDTH / 5) * 3) - (w / 2), (Main.GHEIGHT / 2) - (h / 2), w, h);
 			break;
 		case 3:
-			g.setColor(Color.GREEN);
+			g.setColor(Color.YELLOW);
 			g.fillOval(((Main.GWIDTH / 5) * 4) - (w / 2), (Main.GHEIGHT / 2) - (h / 2), w, h);
 			break;
 		}

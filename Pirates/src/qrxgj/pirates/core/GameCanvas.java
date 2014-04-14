@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -28,6 +29,7 @@ public class GameCanvas extends Canvas {
 	
 	private Graphics bufferG;
 	private BufferedImage bufferI;
+//	private BufferStrategy bufferS;
 	
 	//
 	//
@@ -59,12 +61,12 @@ public class GameCanvas extends Canvas {
 			public void run(){
 				while(running) {
 					repaint();
-					try { Thread.sleep(30); } catch(Exception ex) { }
+					try{ Thread.sleep(1); } catch(Exception ex) { }
 				}
 			}
 		});
 		
-//		renderTh.start();
+		renderTh.start();
 		
 		computeTh = new Thread(new Runnable() {
 			@Override
@@ -91,22 +93,19 @@ public class GameCanvas extends Canvas {
 		bufferG = bufferI.createGraphics();
 		render(bufferG);
 		g.drawImage(bufferI, 0, 0, this);
+		
+//		createBufferStrategy(2);
+//		bufferS = getBufferStrategy();
+//		
+//		bufferG = bufferS.getDrawGraphics();
+//		render(bufferG);
+//		bufferS.show();
 	}
 	
 	private void render(Graphics g) {
-		g.setColor(getBackground());
+		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		disco.renderTo(g);
-	}
-	
-	@Override
-	public int getWidth() {
-		return super.getWidth() - 10;
-	}
-	
-	@Override
-	public int getHeight() {
-		return super.getHeight() - 10;
 	}
 }
