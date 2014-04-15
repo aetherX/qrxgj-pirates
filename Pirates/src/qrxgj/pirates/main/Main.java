@@ -19,9 +19,6 @@ public class Main {
 		window.setVisible(true);
 		window.setResizable(false);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		System.out.println(window.getInsets());
-		
 		window.setLocation(
 				((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - (window.getWidth() / 2), 
 				((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - (window.getHeight() / 2));
