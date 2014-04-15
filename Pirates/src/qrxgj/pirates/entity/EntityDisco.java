@@ -46,20 +46,11 @@ public class EntityDisco extends Entity implements Renderable {
 		case 50:
 			right = true;
 			break;
-		case 440:
+		case 450:
 			right = false;
 			break;
 		default:
 			break;
 		}
-	}	
-	
-/*	@Override
-	public void compute() {
-		x+=10;
-		
-		if(x>490) {
-			x=10;
-		}
-	}*/
+	}
 }
