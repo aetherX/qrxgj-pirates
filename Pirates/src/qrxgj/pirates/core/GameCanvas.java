@@ -13,6 +13,7 @@ import java.util.Random;
 import javax.swing.text.html.parser.Entity;
 
 import qrxgj.pirates.entity.EntityDisco;
+import qrxgj.pirates.main.Main;
 
 public class GameCanvas extends Canvas {
 	private static final long serialVersionUID = -2218555690097957235L;
@@ -40,11 +41,9 @@ public class GameCanvas extends Canvas {
 	
 	public GameCanvas(int w, int h) {
 	// set up the canvas and stuff
-		setPreferredSize(new Dimension(w, h));
+		setSize(new Dimension(w, h));
 		setVisible(true);
 		setBackground(Color.BLACK);
-		
-		System.out.println(getHeight() + " " + getWidth());
 		
 	// important core stuff should go in init!
 		init();
@@ -93,6 +92,16 @@ public class GameCanvas extends Canvas {
 		g.drawImage(bufferI, 0, 0, this); // finally, paint the image
 	}
 	
+	private void render(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 0, Main.GWIDTH - 1, Main.GHEIGHT - 1);; // should be perfect sized rectable!
+		
+		disco.renderTo(g);
+	}
+	
 	@Override
 	public void update(Graphics g){
 	// THIS IS IMPORTANT!
@@ -100,12 +109,5 @@ public class GameCanvas extends Canvas {
 	// if it is not overridden, it will first flush the screen, then paint everything.
 	// this creates flickering.
 		paint(g);
-	}
-	
-	private void render(Graphics g) {
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, getWidth(), getHeight());
-		
-		disco.renderTo(g);
 	}
 }
