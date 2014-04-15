@@ -31,6 +31,7 @@ public class GameCanvas extends Canvas {
 	private Graphics bufferG;
 	private BufferedImage bufferI;
 	
+	public int fiftySix;
 	//
 	//
 	//
